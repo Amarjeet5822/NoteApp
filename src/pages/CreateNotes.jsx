@@ -70,7 +70,7 @@ function CreateNotes() {
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false}    closeOnClick pauseOnHover draggable />
       <div className="w-full mx-auto flex justify-center items-center gap-4 phone:justify-evenly tablet:justify-evenly phone:text-xl tablet:text-xl">
           <button onClick={goBackHandler} className="text-center rounded-md font-medium hover:bg-gray-400 px-6 py-2 bg-gray-200">{<FaBackward />}</button>
-          <p className="text-center phone:w-36 tablet:w-36  w-28 rounded-md font-medium bg-blue-400">
+          <p className="text-center phone:w-36 tablet:w-36 px-4 py-1 w-28 rounded-md font-medium bg-blue-400">
             {isUpdate ? "Update Note" : "Add Note"}
           </p>
       </div>
