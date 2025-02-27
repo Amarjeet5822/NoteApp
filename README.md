@@ -1,5 +1,7 @@
 # 📝 Note-Taking Application
 
+![alt text](./public/image.png)
+
 ## 🌟 Overview
 The Note-Taking Application is a full-stack web application designed to help users efficiently manage their notes. It allows users to perform CRUD (Create, Read, Update, Delete) operations, categorize notes, prioritize tasks, and search for specific notes. The app features a sleek and responsive user interface built with React and Tailwind CSS, while the backend is powered by Express.js.
 
