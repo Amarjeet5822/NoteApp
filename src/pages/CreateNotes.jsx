@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
-import { addNote, updateNotes } from "../store/features/noteUser/noteUserSlice";
-import { Oval } from "react-loader-spinner";
+import { addNote, resetSuccess, updateNotes } from "../store/features/noteUser/noteUserSlice";
+import { FaBackward } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
 
 function CreateNotes() {
   const location = useLocation();
@@ -11,10 +12,12 @@ function CreateNotes() {
   const [content, setContent] = useState(initialData?.content || "");
   const [category, setCategory] = useState(initialData?.category || "");
   const [priority, setPriority] = useState(initialData?.priority || "");
-  const { isLogged, loading } = useSelector((state) => state.authUser);
+  const { isLogged } = useSelector((state) => state.authUser);
+  const {success, error } = useSelector((state) => state.noteUser);
   const [filled, setFilled] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const notify = (message) => toast(message);
   const goBackHandler = () => {
     navigate("/")
   }
@@ -37,7 +40,18 @@ function CreateNotes() {
       setPriority("");
     }
   };
-
+  useState(() => {
+    dispatch(resetSuccess());
+  },[]) 
+  useEffect(( )=> {
+    const msg = isUpdate ? "Note Updated Successfull" : "Note Created Successfull" 
+    if(success ) {
+      notify(msg);
+    }
+    if(error) {
+      notify(error.message);
+    }
+  },[success, error])
   useEffect(() => {
     if (!isLogged) {
       navigate("/login");
@@ -47,27 +61,20 @@ function CreateNotes() {
     } else {
       setFilled(true);
     }
+    return () => {
+      dispatch(resetSuccess())
+    }
   }, [isLogged, isUpdate, title, content, category, priority]);
   return (
-    <div className="min-w-44 phone:min-w-80 max-w-60 phone:max-w-2xl mx-auto text-sm phone:text-base  h-lvw py-5 phone:px-2">
-      <div className="w-full mx-auto flex justify-center items-center gap-4 phone:justify-evenly phone:text-xl">
-          <button onClick={goBackHandler} className="text-center rounded-md font-medium hover:bg-gray-400 px-2">Go back</button>
-          <p className="text-center   w-28 rounded-md font-medium bg-blue-400">
+    <div className="min-w-44 phone:min-w-80 max-w-60 phone:max-w-2xl mx-auto text-sm phone:text-base tablet:text-lg tablet:min-w-full tablet:max-w-4xl h-lvw py-5 phone:px-2 tablet:px-4">
+      <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false}    closeOnClick pauseOnHover draggable />
+      <div className="w-full mx-auto flex justify-center items-center gap-4 phone:justify-evenly tablet:justify-evenly phone:text-xl tablet:text-xl">
+          <button onClick={goBackHandler} className="text-center rounded-md font-medium hover:bg-gray-400 px-6 py-2 bg-gray-200">{<FaBackward />}</button>
+          <p className="text-center phone:w-36 tablet:w-36  w-28 rounded-md font-medium bg-blue-400">
             {isUpdate ? "Update Note" : "Add Note"}
           </p>
       </div>
-      <div className="flex justify-center items-center">
-        <Oval
-          visible={loading}
-          height="80"
-          width="80"
-          color="#4fa94d"
-          ariaLabel="oval-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-        />
-      </div>
-      <div className="max-w-60 phone:max-w-80 flex justify-center flex-col m-auto mt-5 px-2 py-4 shadow-xl bg-gray-300 rounded-md">
+      <div className="max-w-60 phone:max-w-80 tablet:max-w-80 flex justify-center flex-col m-auto mt-5 px-2 py-4 shadow-xl bg-gray-300 rounded-md">
         <input
           className="outline-none rounded-md pl-2"
           type="text"

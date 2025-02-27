@@ -87,13 +87,18 @@ export const deleteNote = createAsyncThunk(
 const initialState = {
   notes: [],
   loading: false,
-  error : null
+  error : null,
+  success: false,
 };
 
 const noteUserSlice = createSlice({
   name: "noteUser",
   initialState,
-  reducers: { },
+  reducers: { 
+    resetSuccess : (state) => {
+      state.success = false;
+    }
+   },
   extraReducers: (builder) => {
     // Get all the notes
     builder.addCase(getNotes.pending, (state) => {
@@ -113,33 +118,41 @@ const noteUserSlice = createSlice({
     builder.addCase(updateNotes.pending, (state) => {
       state.loading = true;
       state.error = null;
+      state.success = false;
     });
     builder.addCase(updateNotes.fulfilled, (state, action) => {
       state.loading = false;
       state.notes = action.payload;
       state.error = null;
+      state.success = true;
     });
     builder.addCase(updateNotes.rejected, (state, action ) => {
       state.loading = false;
       state.error = action.payload || "failed to update note!"
+      state.success = false;
     });
     // Add new note
     builder.addCase(addNote.pending, (state) => {
       state.loading = true;
       state.error = null;
+      state.success = false;
     });
     builder.addCase(addNote.fulfilled, (state, action) => {
       state.loading = false;
       state.notes = action.payload;
       state.error = null;
+      state.success = true;
     });
     builder.addCase(addNote.rejected, (state, action ) => {
       state.loading = false;
       state.error = action.payload || "failed to add note!"
+      state.success = false;
+
     });
     // Delete builder
     builder.addCase(deleteNote.fulfilled, (state) => {
       state.loading = false;
+ 
     });
     builder.addCase(searchNotes.fulfilled, (state, action) => {
       console.log("145 action.payload = ", action.payload)
@@ -149,5 +162,5 @@ const noteUserSlice = createSlice({
     })
   },
 });
-
+export const {resetSuccess } = noteUserSlice.actions
 export default noteUserSlice.reducer;

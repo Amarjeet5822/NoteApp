@@ -8,6 +8,7 @@ import {
   searchNotes,
 } from "../store/features/noteUser/noteUserSlice";
 import { CiSearch } from "react-icons/ci";
+import { toast, ToastContainer } from "react-toastify";
 
 function HomePage() {
   const [isDelete, setDelete] = useState(false);
@@ -15,6 +16,7 @@ function HomePage() {
   const searchRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const notify = (message) => toast(message);
   const { isLogged } = useSelector((state) => state.authUser);
   const { notes } = useSelector((state) => state.noteUser);
   // Search functionality =>
@@ -40,8 +42,10 @@ function HomePage() {
   const deleteHandler = async (noteId) => {
     try {
       await dispatch(deleteNote({ noteId })).unwrap(); // Wait for the deletion to finish
+      notify("Note Deleted Successfully")
       getAllNotes(); // Only fetch notes after successful delete
     } catch (error) {
+       notify(error?.message)
       console.error("Failed to delete note:", error);
     }
   };
@@ -50,7 +54,7 @@ function HomePage() {
     dispatch(getNotes());
   };
   useEffect(() => {
-    console.log("Updated notes from Redux:", notes); // Check if notes are updating
+    // console.log("Updated notes from Redux:", notes); // Check if notes are updating
   }, [notes]);
   useEffect(() => {
     if (!isLogged) {
@@ -65,6 +69,7 @@ function HomePage() {
   }, [searchQuery, dispatch]); // Runs when searchQuery changes
   return (
     <div className="min-w-44 phone:min-w-60  phone:max-w-2xl tablet:max-w-4xl phone:px-4 tablet:px-4 max-w-60 m-auto text-sm phone:text-base tablet:text-xl ">
+      <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false}    closeOnClick pauseOnHover draggable />
       <div>
         {isDelete && (
           <div className="text-center flex flex-col items-center justify-center">

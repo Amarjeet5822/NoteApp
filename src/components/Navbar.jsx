@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router";
 import { logoutUser } from "../store/features/authUser/authUserSlice";
-
+import { FaHome } from "react-icons/fa";
 function Navbar() {
   const dispatch = useDispatch();
   const { isLogged, success } = useSelector((state) => state.authUser);
@@ -18,14 +18,14 @@ function Navbar() {
   return (
     <nav className="mx-auto max-w-60 phone:px-4 tablet:px-4 phone:min-w-80  phone:max-w-2xl tablet:max-w-4xl ">
       <div className=" mx-auto phone:text-2xl tablet:text-2xl  text-xl flex justify-evenly phone:justify-evenly  rounded-b-md items-center gap-8  bg-gray-400 py-3">
-        <div>
+        <div className="hover:bg-gray-500 py-1 px-4 text-center rounded-md hover:text-white  ">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              isActive ? "text-red-700 font-bold" : ""
+              isActive ? "text-red-700  font-bold text-3xl" : ""
             }
           >
-            Home
+          <FaHome />
           </NavLink>
         </div>
         <div className="flex gap-2 ">
