@@ -16,7 +16,7 @@ function Navbar() {
     }
   }, [isLogged, success]);
   return (
-    <nav className="mx-auto max-w-60 phone:px-4 tablet:px-4 phone:min-w-80  phone:max-w-2xl tablet:max-w-4xl ">
+    <nav className="mx-auto max-w-60 phone:px-4 tablet:px-4 phone:min-w-80  phone:max-w-2xl tablet:max-w-5xl ">
       <div className=" mx-auto phone:text-2xl tablet:text-2xl  text-xl flex justify-evenly phone:justify-evenly  rounded-b-md items-center gap-8  bg-gray-400 py-3">
         <div className="hover:bg-gray-500 py-1 px-4 text-center rounded-md hover:text-white  ">
           <NavLink

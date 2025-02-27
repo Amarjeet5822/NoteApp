@@ -68,7 +68,7 @@ function HomePage() {
     }
   }, [searchQuery, dispatch]); // Runs when searchQuery changes
   return (
-    <div className="min-w-44 phone:min-w-60  phone:max-w-2xl tablet:max-w-4xl phone:px-4 tablet:px-4 max-w-60 m-auto text-sm phone:text-base tablet:text-xl ">
+    <div className="min-w-44 phone:min-w-60  phone:max-w-2xl tablet:max-w-5xl phone:px-4 tablet:px-4 max-w-60 m-auto text-sm phone:text-base tablet:text-xl ">
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false}    closeOnClick pauseOnHover draggable />
       <div>
         {isDelete && (

@@ -66,7 +66,7 @@ function CreateNotes() {
     }
   }, [isLogged, isUpdate, title, content, category, priority]);
   return (
-    <div className="min-w-44 phone:min-w-80 max-w-60 phone:max-w-2xl mx-auto text-sm phone:text-base tablet:text-lg tablet:min-w-full tablet:max-w-4xl h-lvw py-5 phone:px-2 tablet:px-4">
+    <div className="min-w-44 phone:min-w-80 max-w-60 phone:max-w-2xl mx-auto text-sm phone:text-base tablet:text-lg tablet:min-w-full tablet:max-w-5xl h-lvw py-5 phone:px-2 tablet:px-4">
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false}    closeOnClick pauseOnHover draggable />
       <div className="w-full mx-auto flex justify-center items-center gap-4 phone:justify-evenly tablet:justify-evenly phone:text-xl tablet:text-xl">
           <button onClick={goBackHandler} className="text-center rounded-md font-medium hover:bg-gray-400 px-6 py-2 bg-gray-200">{<FaBackward />}</button>
