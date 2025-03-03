@@ -128,26 +128,21 @@ const authUserSlice = createSlice({
       state.error = action.payload || "failed register!"
     });
     // Logout builder
-    builder.addCase(logoutUser.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-      state.success = false;
-      state.data = null
-    });
+    // builder.addCase(logoutUser.pending, (state) => {
+    //   state.loading = true;
+    //   state.error = null;
+    //   state.success = false;
+    //   state.data = null
+    // });
     builder.addCase(logoutUser.fulfilled, (state, action) => {
       localStorage.removeItem("isLogged");
       state.isLogged = false;
-      state.loading = false;
-      state.data = action.payload;
-      state.error = null;
-      state.success = true;
+    
     });
-    builder.addCase(logoutUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload || "failed logout!";
-      state.success = false;
-      state.data = null;
-    })
+    // builder.addCase(logoutUser.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.error = action.payload || "failed logout!";
+    // })
     // Delete builder
     builder.addCase(deleteUser.fulfilled, (state) => {
       localStorage.removeItem("isLogged");

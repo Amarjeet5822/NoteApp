@@ -54,7 +54,7 @@ function RegisterPage() {
     }
   }, [error, success, loading, data]);
   return (
-    <div>
+    <div className="min-w-44 phone:min-w-60  phone:max-w-2xl tablet:max-w-5xl phone:px-4 tablet:px-4 max-w-60 m-auto text-sm phone:text-base tablet:text-xl ">
       <div
         className={
           isLoading
@@ -74,7 +74,7 @@ function RegisterPage() {
       </div>
       <form
         onSubmit={formHandler}
-        className="flex flex-col justify-center items-center bg-gray-100 px-2 pt-5"
+        className="flex flex-col justify-center items-center px-2 pt-5"
       >
         <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false} closeOnClick pauseOnHover draggable />
 

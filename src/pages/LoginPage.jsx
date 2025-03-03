@@ -54,7 +54,7 @@ function LoginPage() {
     }
   }, [error, success,isLogged, loading, data]);
   return (
-    <div>
+    <div className="min-w-44 phone:min-w-60  phone:max-w-2xl tablet:max-w-5xl phone:px-4 tablet:px-4 max-w-60 m-auto text-sm phone:text-base tablet:text-xl ">
       <div className={isLoading ? `fixed top-0  left-0  h-screen w-full flex justify-center items-center` : "" }
           >
             <Oval
@@ -69,7 +69,7 @@ function LoginPage() {
           </div>
       <form
         onSubmit={formHandler}
-        className="flex flex-col justify-center items-center py-8   bg-gray-100 px-6 "
+        className="flex flex-col justify-center items-center py-8  px-6 "
       >
         <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false}    closeOnClick pauseOnHover draggable />
         <div className="bg-white shadow-md rounded-lg px-6 py-6 w-full max-w-sm">
