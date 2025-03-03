@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { toast, ToastContainer } from "react-toastify";
-import { loginUser, resetState } from "../store/features/authUser/authUserSlice";
-import { Oval } from "react-loader-spinner";
+import {
+  loginUser,
+  resetState,
+} from "../store/features/authUser/authUserSlice";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   // get state from authUser
-  const {isLogged, loading, error, data, success } = useSelector(
-    (state) => state.authUser );
+  const { isLogged, loading, error, data, success } = useSelector(
+    (state) => state.authUser
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // Toast response on UI
@@ -27,10 +30,10 @@ function LoginPage() {
         toast.info(message);
     }
   };
-  
+
   const formHandler = (event) => {
     event.preventDefault();
-    if ( !email || !pass) {
+    if (!email || !pass) {
       notify("missing field");
       return;
     }
@@ -41,37 +44,41 @@ function LoginPage() {
   useEffect(() => {
     loading ? setIsLoading(true) : setIsLoading(false);
     if (success && data?.message) {
-      notify(data?.message, "success")
+      notify(data?.message, "success");
       setTimeout(() => {
-        navigate("/")
-      },1500)
+        navigate("/");
+      }, 1500);
     }
     if (error) {
       notify(error?.message, "error");
     }
     return () => {
       dispatch(resetState());
-    }
-  }, [error, success,isLogged, loading, data]);
+    };
+  }, [error, success, isLogged, loading, data]);
   return (
     <div className="min-w-44 phone:min-w-60  phone:max-w-2xl tablet:max-w-5xl phone:px-4 tablet:px-4 max-w-60 m-auto text-sm phone:text-base tablet:text-xl ">
-      <div className={isLoading ? `fixed top-0  left-0  h-screen w-full flex justify-center items-center` : "" }
-          >
-            <Oval
-              visible={isLoading}
-              height="80"
-              width="80"
-              color="#4fa94d"
-              ariaLabel="oval-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
-            />
-          </div>
+      <div
+        className={
+          isLoading
+            ? `fixed top-0  left-0 text-5xl  h-screen w-full flex justify-center items-center`
+            : ""
+        }
+      >
+        {isLoading ? "Loading..." : ""}
+      </div>
       <form
         onSubmit={formHandler}
         className="flex flex-col justify-center items-center py-8  px-6 "
       >
-        <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false}    closeOnClick pauseOnHover draggable />
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar={false}
+          closeOnClick
+          pauseOnHover
+          draggable
+        />
         <div className="bg-white shadow-md rounded-lg px-6 py-6 w-full max-w-sm">
           <p className="text-2xl font-semibold text-center text-gray-800 pb-4">
             Login Please

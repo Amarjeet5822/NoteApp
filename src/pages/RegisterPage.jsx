@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { registerUser } from "../store/features/authUser/authUserSlice";
-import { Oval } from "react-loader-spinner";
 import { useNavigate } from "react-router";
 
 function RegisterPage() {
@@ -29,7 +28,7 @@ function RegisterPage() {
         toast.info(message);
     }
   };
-  
+
   const formHandler = (event) => {
     event.preventDefault();
     if (!name || !email || !pass) {
@@ -44,10 +43,10 @@ function RegisterPage() {
   useEffect(() => {
     loading ? setIsLoading(true) : setIsLoading(false);
     if (success && data?.message) {
-      notify(data?.message, "success")
+      notify(data?.message, "success");
       setTimeout(() => {
-        navigate("/login")
-      },1500)
+        navigate("/login");
+      }, 1500);
     }
     if (error) {
       notify(error?.message, "error");
@@ -58,25 +57,24 @@ function RegisterPage() {
       <div
         className={
           isLoading
-            ? `fixed top-0  left-0  h-screen w-full flex justify-center items-center`
+            ? `fixed top-0  left-0 text-5xl h-screen w-full flex justify-center items-center`
             : ""
         }
       >
-        <Oval
-          visible={isLoading}
-          height="80"
-          width="80"
-          color="#4fa94d"
-          ariaLabel="oval-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-        />
+        {isLoading ? "Loading..." : ""}
       </div>
       <form
         onSubmit={formHandler}
         className="flex flex-col justify-center items-center px-2 pt-5"
       >
-        <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false} closeOnClick pauseOnHover draggable />
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar={false}
+          closeOnClick
+          pauseOnHover
+          draggable
+        />
 
         <div className="bg-white shadow-lg rounded-lg px-6 py-6 w-full max-w-sm">
           <p className="text-2xl font-semibold text-center text-gray-800 pb-4">
