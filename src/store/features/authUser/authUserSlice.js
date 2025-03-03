@@ -1,15 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const urlBE = import.meta.env.VITE_BACKEND_URL;
-
 // First, create the thunk ( Login User)
 export const loginUser = createAsyncThunk(
   "authUser/loginUser",
   async ({ email, pass }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${urlBE}/users/login`,
+        `/api/users/login`,
         { email, pass },
         { withCredentials: true }
       );
@@ -26,7 +24,7 @@ export const registerUser = createAsyncThunk(
   async ({email, pass, name},{ rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${urlBE}/users/register`,
+        `/api/users/register`,
         { name, email, pass },
         { withCredentials: true, }
       );
@@ -42,7 +40,7 @@ export const logoutUser = createAsyncThunk(
   async ( _,{ rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${urlBE}/users/logout`,
+        `/api/users/logout`,
         {},
         { withCredentials: true, }
       );
@@ -58,7 +56,7 @@ export const deleteUser = createAsyncThunk(
   async ( _,{ rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `${urlBE}/users`,
+        `/api/users`,
         { withCredentials: true, }
       );
       return response.data;

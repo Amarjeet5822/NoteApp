@@ -1,15 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const urlBE = import.meta.env.VITE_BACKEND_URL;
-
 // Get all the notes
 export const getNotes = createAsyncThunk(
   "noteUser/getNotes",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${urlBE}/notes`,
+        `/api/notes`,
         { withCredentials: true }
       );
       return response.data;
@@ -26,7 +24,7 @@ export const searchNotes = createAsyncThunk(
     try {
       console.log("line 27 query = ", query );
       const response = await axios.get(
-        `${urlBE}/features/search?q=${query}`,
+        `/api/features/search?q=${query}`,
         { withCredentials: true }
       );
       return response.data;
@@ -42,7 +40,7 @@ export const updateNotes = createAsyncThunk(
   async ({noteId, title, content, category, priority},{ rejectWithValue }) => {
     try {
       const response = await axios.patch(
-        `${urlBE}/notes/${noteId}`,
+        `/api/notes/${noteId}`,
         { title, content, category, priority },
         { withCredentials: true, }
       );
@@ -58,7 +56,7 @@ export const addNote = createAsyncThunk(
   async ({ title, content, category, priority},{ rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${urlBE}/notes`,
+        `/api/notes`,
         { title, content, category, priority},
         { withCredentials: true, }
       );
@@ -74,7 +72,7 @@ export const deleteNote = createAsyncThunk(
   async ( {noteId},{ rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `${urlBE}/notes/${noteId}`,
+        `/api/notes/${noteId}`,
         { withCredentials: true, }
       );
       return response.data;
