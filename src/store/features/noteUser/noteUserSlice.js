@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import bc_url from "../../../../app";
 
 // Get all the notes
 export const getNotes = createAsyncThunk(
@@ -7,7 +8,7 @@ export const getNotes = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `/api/notes`,
+        `${bc_url}/notes`,
         { withCredentials: true }
       );
       return response.data;
@@ -24,7 +25,7 @@ export const searchNotes = createAsyncThunk(
     try {
       console.log("line 27 query = ", query );
       const response = await axios.get(
-        `/api/features/search?q=${query}`,
+        `${bc_url}/features/search?q=${query}`,
         { withCredentials: true }
       );
       return response.data;
@@ -40,7 +41,7 @@ export const updateNotes = createAsyncThunk(
   async ({noteId, title, content, category, priority},{ rejectWithValue }) => {
     try {
       const response = await axios.patch(
-        `/api/notes/${noteId}`,
+        `${bc_url}/notes/${noteId}`,
         { title, content, category, priority },
         { withCredentials: true, }
       );
@@ -56,7 +57,7 @@ export const addNote = createAsyncThunk(
   async ({ title, content, category, priority},{ rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `/api/notes`,
+        `${bc_url}/notes`,
         { title, content, category, priority},
         { withCredentials: true, }
       );
@@ -72,7 +73,7 @@ export const deleteNote = createAsyncThunk(
   async ( {noteId},{ rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `/api/notes/${noteId}`,
+        `${bc_url}/notes/${noteId}`,
         { withCredentials: true, }
       );
       return response.data;
