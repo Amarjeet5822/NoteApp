@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import bc_url from "../../../../app";
 
+const bc_url = "https://notesapp-bc.onrender.com";
 // Get all the notes
 export const getNotes = createAsyncThunk(
   "noteUser/getNotes",

@@ -62,7 +62,7 @@ function LoginPage() {
       <div
         className={
           isLoading
-            ? `fixed top-0  left-0 text-5xl  h-screen w-full flex justify-center items-center`
+            ? `fixed top-0  left-0 text-4xl  w-full flex justify-center items-center`
             : ""
         }
       >

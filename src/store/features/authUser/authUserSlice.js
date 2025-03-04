@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import bc_url from "../../../../app";
+
+const bc_url = "https://notesapp-bc.onrender.com"
 // First, create the thunk ( Login User)
 export const loginUser = createAsyncThunk(
   "authUser/loginUser",
