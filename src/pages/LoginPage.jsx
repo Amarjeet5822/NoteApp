@@ -11,9 +11,8 @@ import {
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   // get state from authUser
-  const { isLogged, loading, error, data, success } = useSelector(
+  const { isLogged, error, data, success } = useSelector(
     (state) => state.authUser
   );
   const navigate = useNavigate();
@@ -43,7 +42,6 @@ function LoginPage() {
     setPass("");
   };
   useEffect(() => {
-    loading ? setIsLoading(true) : setIsLoading(false);
     if (success && data?.message) {
       notify(data?.message, "success");
       setTimeout(() => {
@@ -56,18 +54,9 @@ function LoginPage() {
     return () => {
       dispatch(resetState());
     };
-  }, [error, success, isLogged, loading, data]);
+  }, [error, success, isLogged, data]);
   return (
     <div className="min-w-44 phone:min-w-60  phone:max-w-2xl tablet:max-w-5xl phone:px-4 tablet:px-4 max-w-60 m-auto text-sm phone:text-base tablet:text-xl ">
-      <div
-        className={
-          isLoading
-            ? `fixed top-0  left-0 text-4xl  w-full flex justify-center items-center`
-            : ""
-        }
-      >
-        {isLoading ? "Loading..." : ""}
-      </div>
       <form
         onSubmit={formHandler}
         className="flex flex-col justify-center items-center py-8  px-6 "
