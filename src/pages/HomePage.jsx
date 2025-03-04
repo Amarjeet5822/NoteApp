@@ -12,6 +12,8 @@ import { toast, ToastContainer } from "react-toastify";
 
 function HomePage() {
   const [isDelete, setDelete] = useState(false);
+  const [noteId, setNoteId ] = useState(null);
+  const [isAccount, setIsAccount ] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef(null);
   const navigate = useNavigate();
@@ -29,9 +31,11 @@ function HomePage() {
     }, 500); // Adjust the delay time as needed (500ms is common)
   };
 
-  const deleteAccount = () => {
+  const deleteAccountNote = () => {
+    isAccount ? dispatch(deleteUser()) : deleteHandler(noteId) ;
     setDelete(false);
-    dispatch(deleteUser());
+    setNoteId(null);
+    setIsAccount(false);
   };
   const AddNoteHandler = () => {
     navigate("/addnotes", { state: { isUpdate: false } });
@@ -74,7 +78,7 @@ function HomePage() {
         {isDelete && (
           <div className="text-center flex flex-col items-center justify-center">
             <p className="text-red-600 font-medium">
-              Are You Sure You want to Delete Account??
+              {`Are You Sure You want to Delete ${ isAccount ? "Account" : "Note"} ??`}
             </p>
             <div className="flex justify-center items-center gap-1">
               <button
@@ -84,7 +88,7 @@ function HomePage() {
                 No
               </button>
               <button
-                onClick={deleteAccount}
+                onClick={ deleteAccountNote}
                 className="bg-blue-200 py-1 px-5 mt-1 rounded-md hover:bg-red-400 hover:font-medium "
               >
                 Yes
@@ -103,7 +107,10 @@ function HomePage() {
         </button>
         <button
           className="bg-blue-200 py-1 px-3 mt-1 rounded-md hover:bg-red-400 hover:font-medium "
-          onClick={() => setDelete(true)}
+          onClick={() => {
+            setDelete(true)
+            setIsAccount(true)
+          }}
         >
           Delete Account
         </button>
@@ -167,7 +174,10 @@ function HomePage() {
                         Update
                       </button>
                       <button
-                        onClick={() => deleteHandler(item._id)}
+                        onClick={() => {
+                          setNoteId(item._id)
+                          setDelete(true);
+                        }}
                         className="bg-red-300 py-2 px-3 rounded-md hover:bg-red-600 hover:text-white tablet:px-4 tablet:font-medium"
                       >
                         Delete
