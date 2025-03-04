@@ -57,7 +57,7 @@ function RegisterPage() {
       <div
         className={
           isLoading
-            ? `fixed top-0  left-0 text-4xl w-full flex justify-center items-center`
+            ? `fixed top-[200px]  left-0 text-4xl w-full flex justify-center items-center`
             : ""
         }
       >
