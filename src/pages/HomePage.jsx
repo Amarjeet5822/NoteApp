@@ -60,17 +60,29 @@ function HomePage() {
   useEffect(() => {
     // console.log("Updated notes from Redux:", notes); // Check if notes are updating
   }, [notes]);
-  useEffect(() => {
-    if (!isLogged) {
-      navigate("/login");
-    }
-    getAllNotes();
-  }, [isLogged]);
+  // useEffect(() => {
+  //   if (!isLogged) {
+  //     navigate("/login");
+  //   }
+  //   getAllNotes();
+  // }, [isLogged]);
   useEffect(() => {
     if (searchQuery.trim() === "") {
       getAllNotes(); // Fetch all notes if search query is empty
     }
   }, [searchQuery, dispatch]); // Runs when searchQuery changes
+  if (!isLogged) {
+    return (
+      <div className="min-w-44 phone:min-w-60  phone:max-w-2xl tablet:max-w-5xl phone:px-4 tablet:px-4 max-w-60 mx-auto mt-24">
+        <img
+          src="https://images.ctfassets.net/lzny33ho1g45/5iJ10OKtmYa4BZpYvhb2xw/e890aa9115b53ef2d41c9135902285a2/Best_note_taking_apps.jpg?w=1520&fm=avif&q=31&fit=thumb&h=760" // 👈 replace with your image path
+          alt="Please login to view notes"
+          className="w-full  object-cover rounded-md shadow-md"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="min-w-44 phone:min-w-60  phone:max-w-2xl tablet:max-w-5xl phone:px-4 tablet:px-4 max-w-60 m-auto text-sm phone:text-base tablet:text-xl ">
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false}    closeOnClick pauseOnHover draggable />
