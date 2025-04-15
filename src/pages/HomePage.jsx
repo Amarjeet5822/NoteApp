@@ -73,11 +73,11 @@ function HomePage() {
   }, [searchQuery, dispatch]); // Runs when searchQuery changes
   if (!isLogged) {
     return (
-      <div className="min-w-44 phone:min-w-60  phone:max-w-2xl tablet:max-w-5xl phone:px-4 tablet:px-4 max-w-60 mx-auto mt-24">
+      <div className="min-w-44 phone:min-w-60 h-svh phone:max-w-2xl tablet:max-w-5xl  phone:px-4 tablet:px-4 max-w-60 mx-auto ">
         <img
           src="https://images.ctfassets.net/lzny33ho1g45/5iJ10OKtmYa4BZpYvhb2xw/e890aa9115b53ef2d41c9135902285a2/Best_note_taking_apps.jpg?w=1520&fm=avif&q=31&fit=thumb&h=760" // 👈 replace with your image path
           alt="Please login to view notes"
-          className="w-full  object-cover rounded-md shadow-md"
+          className="w-full h-full object-cover  rounded-md shadow-md"
         />
       </div>
     );
